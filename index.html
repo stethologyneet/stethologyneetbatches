@@ -1,177 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Card</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Global styles */
         body {
             font-family: Arial, sans-serif;
             background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            display: flex;
+            height: 100vh;
             opacity: 0;
             animation: fadeIn 1s forwards;
         }
+
         @keyframes fadeIn {
             0% {
-                opacity: 0;
                 transform: translateY(20px);
+                opacity: 0;
             }
+
             100% {
-                opacity: 1;
                 transform: translateY(0);
+                opacity: 1;
             }
         }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto; /* Enable vertical scrolling */
+            scrollbar-width: thin; /* Thin scrollbar */
+            scrollbar-color: blue white; /* Scrollbar color */
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px; /* Width of the scrollbar */
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: white; /* Track color */
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: blue; /* Thumb color */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        /* Sidebar links */
+        .sidebar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 14px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .dropdown select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            appearance: none; /* Remove default arrow */
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .dropdown::after {
+            content: '\25BC'; /* Unicode character for downward arrow */
+            position: absolute;
+            top: calc(50% - 5px); /* Center vertically */
+            right: 10px;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none; /* Initially hidden on desktop */
+        }
+
+        /* Content area styles */
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Banner styles */
+        .banner {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .navbar a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            position: relative;
+            font-size: 14px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container for buttons */
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            width: 100%;
+            gap: 20px;
+            padding: 20px;
         }
-        .card {
-            flex: 1 1 300px;
-            height: 300px;
-            max-width: 500px;
-            background-color: #fff;
+
+        /* Button styles */
+        .button-container {
+            flex: 1 0 calc(25% - 20px); /* Adjusted for desktop to fit 4 buttons per row */
+            max-width: calc(25% - 20px); /* Adjusted for desktop to fit 4 buttons per row */
+            height: 120px;
+            background-color: white;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            margin: 20px;
-            opacity: 0;
-            transform: scale(0.9);
-            animation: cardFadeIn 0.5s forwards;
-        }
-        @keyframes cardFadeIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        .card-header {
-            padding: 20px;
-            background-color: white;
-            text-align: center;
-            position: relative;
-        }
-        .card-header h3 {
-            margin: 0;
-            font-size: 1em;
-            color: #333;
-            padding: 10px 30px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
-        .premium-label {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 3px 8px;
-            background-color: #d63384; /* Darker pink */
-            color: white;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 0.75em; /* Smaller font size */
-            font-family: 'Arial', sans-serif; /* Modern font */
-            vertical-align: middle;
-        }
-        .card-content {
-            padding: 30px;
-            text-align: center;
-        }
-        .card-content p {
-            color: #777;
-            margin: 0px 0;
-            font-size: 0.9em;
-        }
-        .card-content .dates {
-            margin: 10px 0;
-            color: #555;
-            font-size: 0.8em;
-        }
-        .card-content a {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #007bff;
-            border: none;
-            color: #fff;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             text-decoration: none;
-            transition: background-color 0.3s, transform 0.3s;
-            font-family: 'Roboto', sans-serif; /* Stylish, modern font */
+            color: black;
+            transition: transform 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
         }
-        .card-content a:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
+
+        .button-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .button-icon {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .button-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .premium-label {
+            font-size: 12px;
+            color: #d63384;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            /* Adjust sidebar and button container for tablets */
+            .sidebar {
+                width: 100%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                transition: all 0.3s ease;
+            }
+
+            .sidebar.show-sidebar {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block; /* Show toggle button on tablets */
+                font-size: 20px;
+                text-align: center;
+                cursor: pointer;
+                margin-bottom: 10px;
+            }
+
+            .button-container {
+                flex: 1 0 calc(50% - 20px); /* 2 buttons per row for tablets */
+                max-width: calc(50% - 20px); /* 2 buttons per row for tablets */
+            }
         }
 
         @media (max-width: 600px) {
-            .card {
-                width: 100%;
-                height: auto;
-                margin: 10px 0;
-            }
-            .card-header h3 {
-                padding: 10px 20px;
+            /* Adjust button container for mobile */
+            .button-container {
+                flex: 1 0 calc(50% - 20px); /* 2 buttons per row for mobile */
+                max-width: calc(50% - 20px); /* 2 buttons per row for mobile */
+                height: 100px; /* Reduced height for mobile */
             }
         }
     </style>
+    <title>Stethology for NEET</title>
 </head>
+
 <body>
-    <div class="container" id="courseContainer">
-        <div class="card" data-end-date="2025-06-20">
-            <div class="card-header">
-                <h3>NCERT Mastery Series 1.0</h3>
-            </div>
-            <div class="card-content">
-                <p>For NEET 2025 Dropper Students</p>
-                <p class="dates">
-                   📅 Starts on 17 September 2024<br>
-                    Ends on 20 June 2025
-                </p>
-                <a href="ncertmastery.html">LET'S STUDY</a>
-            </div>
+
+    <!-- Sidebar with mobile menu toggle -->
+    <div class="sidebar">
+        <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo"
+            style="max-width: 100%; max-height: 85% margin-bottom: 20px;">
+        <div class="dropdown">
+            <select onchange="handleDropdownChange(event)">
+                <option value="Select class" selected disabled></option>
+                <option value="🧑‍🎓XI - NEET">🧑‍🎓XI - NEET</option>
+                <option value="🧑‍🎓XII - NEET">🧑‍🎓XII - NEET</option>
+                <option value="🧑‍🎓Dropper - NEET">🧑‍🎓Dropper - NEET</option>
+            </select>
+        </div>
+        <!-- Navigation links -->
+        <a href="#" onclick="navigateTo('https://parnavar.github.io/stethologyneet.github.io', this)">🏠 Home</a>
+        <a href="#" onclick="navigateTo('https://www.example.com/subject1', this)">🎓 Study</a>
+        <a href="#" onclick="navigateTo('https://www.example.com/subject2', this)">✍️ Batches</a>
+        <a href="#" onclick="navigateTo('https://www.example.com/subject3', this)">📝 Test Series</a>
+        <!-- Mobile menu toggle -->
+        <div class="mobile-menu-toggle" onclick="toggleSidebar()">
+            |||
+        </div>
+    </div>
+
+    <!-- Content section -->
+    <div class="content">
+        <!-- Banner and navigation bar -->
+        <div class="banner">
+            <b><font size="4">STETHOLOGY NEET</font></b>
         </div>
 
-        <div class="card" data-end-date="2025-05-30">
-            <div class="card-header">
-                <h3>NEET Crash Course 2025 <span class="premium-label">PREMIUM</span></h3>
+        <!-- Button containers -->
+        <div class="container">
+            <div class="button-container"
+                onclick="navigateTo('https://parnavar.github.io/stethologyneet.github.io', this)">
+                <div class="button-icon">🔔</div>
+                <div class="button-text">Notices</div>
             </div>
-            <div class="card-content">
-                <p>For NEET 2025 Aspirants</p>
-                <p class="dates">
-                   📅 Starts on 1 December 2024<br>
-                    Ends on 30 May 2025
-                </p>
-                <a href="neet-crash-course.html">🔒 COMING SOON</a>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject1', this)">
+                <div class="button-icon">🔬</div>
+                <div class="button-text">Physics</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject2', this)">
+                <div class="button-icon">🌿</div>
+                <div class="button-text">Botany</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject3', this)">
+                <div class="button-icon">🦁</div>
+                <div class="button-text">Zoology</div>
             </div>
         </div>
     </div>
-     
-    <script>
-        const cards = document.querySelectorAll('.card');
-        const today = new Date();
 
-        cards.forEach(card => {
-            const endDate = new Date(card.dataset.endDate);
-            if (today > endDate) {
-                card.style.display = 'none'; // Hide the card if the end date has passed
+    <!-- JavaScript to toggle sidebar in mobile -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the selected value from localStorage if available
+            const selectedValue = localStorage.getItem('selectedClass');
+            if (selectedValue) {
+                // Set the dropdown value to the retrieved value
+                document.querySelector('.dropdown select').value = selectedValue;
             }
+
+            // Event listener for dropdown change
+            document.querySelector('.dropdown select').addEventListener('change', function (event) {
+                const value = event.target.value;
+                localStorage.setItem('selectedClass', value); // Store selected value in localStorage
+                alert(`Selected: ${value}`);
+                // You can add code here to navigate to different pages based on the selection
+            });
         });
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('show-sidebar');
+        }
+
+        function navigateTo(url, element) {
+            element.classList.add('clicked');
+            setTimeout(function () {
+                if (url !== '#') {
+                    window.open(url, '_self');
+                }
+                element.classList.remove('clicked');
+            }, 400);
+        }
+
+        function comingSoon(event) {
+            event.preventDefault();
+            alert("Coming Soon");
+        }
     </script>
 </body>
+
 </html>
