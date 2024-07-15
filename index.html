@@ -19,7 +19,6 @@
 
         @keyframes fadeIn {
             0% {
-                
                 opacity: 0;
             }
 
@@ -29,33 +28,32 @@
             }
         }
 
-       /* Sidebar styles */
-.sidebar {
-    width: 235px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: blue white;
-    scroll-behavior: smooth; /* Smooth scrolling behavior */
-}
+        /* Sidebar styles */
+        .sidebar {
+            width: 235px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: blue white;
+            scroll-behavior: smooth; /* Smooth scrolling behavior */
+        }
 
-.sidebar::-webkit-scrollbar {
-    width: 1px; /* Adjusted scrollbar width */
-}
+        .sidebar::-webkit-scrollbar {
+            width: 1px; /* Adjusted scrollbar width */
+        }
 
-.sidebar::-webkit-scrollbar-track {
-    background: white;
-}
+        .sidebar::-webkit-scrollbar-track {
+            background: white;
+        }
 
-.sidebar::-webkit-scrollbar-thumb {
-    background-color: blue;
-    border-radius: 2px;
-}
-
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: blue;
+            border-radius: 2px;
+        }
 
         /* Sidebar links */
         .sidebar a {
@@ -68,20 +66,25 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
             display: flex;
             align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
         .sidebar a:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            background-color: #f0f8ff;
+            color: blue;
         }
 
         .sidebar a.active {
             background-color: #e0f0ff;
             border: 1px solid blue;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            color: blue;
         }
 
         /* Dropdown menu */
@@ -271,14 +274,14 @@
             </select>
         </div>
         <a href="homepage.html" target="content-frame" class="active">🏠 Home</a>
-        <a href="https://www.example.com/subject1" target="content-frame">🎓  Study</a>
-        <a href="batches.html" target="content-frame">✍️  Batches</a>
-        <a href="https://www.example.com/subject3" target="content-frame">📝  Test Series</a>
-        <a href="" target="content-frame">👨🏻‍🏫  Mentorship</a>
-        <a href="" target="content-frame">🌐  Connect</a>
-        <a href="chatbot.html" target="content-frame">🤖  AI chat/Doubt support</a>
-        <a href="" target="content-frame">🤖  support</a>
-        <a href="" target="content-frame">🤖  support</a>
+        <a href="https://www.example.com/subject1" target="content-frame">🎓 Study</a>
+        <a href="batches.html" target="content-frame">✍️ Batches</a>
+        <a href="https://www.example.com/subject3" target="content-frame">📝 Test Series</a>
+        <a href="" target="content-frame">👨🏻‍🏫 Mentorship</a>
+        <a href="" target="content-frame">🌐 Connect</a>
+        <a href="chatbot.html" target="content-frame">🤖 AI chat/Doubt support</a>
+        <a href="" target="content-frame">🤖 support</a>
+        <a href="" target="content-frame">🤖 support</a>
         <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
     </div>
 
