@@ -10,6 +10,27 @@
             height: 100%;
             overflow: hidden;
         }
+/* Scrollbar styles */
+/* Works only in WebKit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #007bff; /* Color of the scrollbar handle */
+    border-radius: 10px; /* Rounded corners of the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; /* Darker color when hovered */
+}
 
         body {
             font-family: Arial, sans-serif;
