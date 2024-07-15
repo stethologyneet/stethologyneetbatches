@@ -62,22 +62,24 @@
             font-weight: bold;
             margin: 10px 0;
             font-size: 14px;
-            padding: 10px;
+            padding: 15px;
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             align-items: center;
         }
 
         .sidebar a:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
 
         .sidebar a.active {
-            background-color: #e0f7fa;
-            border-left: 5px solid blue;
+            background-color: #e0f0ff;
+            border: 1px solid blue;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         /* Dropdown menu */
@@ -116,12 +118,6 @@
         .content {
             flex: 1;
             padding: 20px;
-        }
-
-        .content iframe {
-            width: 100%;
-            height: calc(100vh - 40px);
-            border: none;
         }
 
         /* Banner styles */
@@ -262,59 +258,54 @@
 </head>
 
 <body>
-
-    <!-- Sidebar with mobile menu toggle -->
     <div class="sidebar">
         <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo" style="max-width: 100%; max-height: 85%; margin-bottom: 20px;">
         <div class="dropdown">
-            <select onchange="handleDropdownChange(event)">
-                <option value="Select class" selected disabled>Select class</option>
+            <select id="class-select" onchange="handleDropdownChange(event)">
+                <option value="Select class" disabled>Select class</option>
                 <option value="🧑‍🎓XI - NEET">🧑‍🎓XI - NEET</option>
                 <option value="🧑‍🎓XII - NEET">🧑‍🎓XII - NEET</option>
                 <option value="🧑‍🎓Dropper - NEET">🧑‍🎓Dropper - NEET</option>
             </select>
         </div>
-        <!-- Navigation links -->
-        <a href="https://parnavar.github.io/stethologyneet.github.io" target="content-frame" onclick="setActiveLink(this)">🏠 Home</a>
-        <a href="https://www.example.com/subject1" target="content-frame" onclick="setActiveLink(this)">🎓 Study</a>
-        <a href="https://www.example.com/subject2" target="content-frame" onclick="setActiveLink(this)">✍️ Batches</a>
-        <a href="https://www.example.com/subject3" target="content-frame" onclick="setActiveLink(this)">📝 Test Series</a>
-        <!-- Mobile menu toggle -->
-        <div class="mobile-menu-toggle" onclick="toggleSidebar()">
-            |||
-        </div>
+        <a href="https://parnavar.github.io/stethologyneet.github.io" target="content-frame" class="active">🏠 Home</a>
+        <a href="https://www.example.com/subject1" target="content-frame">🎓 Study</a>
+        <a href="batches.html" target="content-frame">✍️ Batches</a>
+        <a href="https://www.example.com/subject3" target="content-frame">📝 Test Series</a>
+        <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
     </div>
 
-    <!-- Content section -->
     <div class="content">
-        <!-- Banner and navigation bar -->
-        <div class="banner">
-            <b><font size="4">STETHOLOGY NEET</font></b>
-        </div>
-
-        <!-- iframe to load content -->
-        <iframe name="content-frame" src="https://parnavar.github.io/stethologyneet.github.io"></iframe>
+        <div class="banner">Stethology for NEET</div>
+        <iframe id="content-frame" name="content-frame" src="https://parnavar.github.io/stethologyneet.github.io" style="border:none; width:100%; height:calc(100vh - 70px);"></iframe>
     </div>
 
     <script>
-        // Function to toggle the sidebar in mobile view
         function toggleSidebar() {
             document.querySelector('.sidebar').classList.toggle('show-sidebar');
         }
 
-        // Function to set the active link
-        function setActiveLink(link) {
-            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-            link.classList.add('active');
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        const selectElement = document.getElementById('class-select');
+        const savedClass = localStorage.getItem('selectedClass');
+
+        if (savedClass) {
+            selectElement.value = savedClass;
+        } else {
+            selectElement.value = "Select class";
         }
 
-        // Function to handle dropdown change
         function handleDropdownChange(event) {
-            const value = event.target.value;
-            if (value !== "Select class") {
-                window.open(`https://www.example.com/${value}`, 'content-frame');
-            }
+            localStorage.setItem('selectedClass', event.target.value);
         }
+
+        selectElement.addEventListener('change', handleDropdownChange);
     </script>
 </body>
 
