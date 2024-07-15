@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* Global styles */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: white;
@@ -29,88 +34,11 @@
             }
         }
 
-        /* Sidebar styles */
-        .sidebar {
-            width: 250px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            overflow-y: auto; /* Enable vertical scrolling */
-            scrollbar-width: thin; /* Thin scrollbar */
-            scrollbar-color: blue white; /* Scrollbar color */
-        }
-
-        .sidebar::-webkit-scrollbar {
-            width: 6px; /* Width of the scrollbar */
-        }
-
-        .sidebar::-webkit-scrollbar-track {
-            background: white; /* Track color */
-        }
-
-        .sidebar::-webkit-scrollbar-thumb {
-            background-color: blue; /* Thumb color */
-            border-radius: 10px; /* Rounded corners */
-        }
-
-        /* Sidebar links */
-        .sidebar a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            margin: 10px 0;
-            font-size: 14px;
-            padding: 10px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-        }
-
-        .sidebar a:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Dropdown menu */
-        .dropdown {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .dropdown select {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            appearance: none; /* Remove default arrow */
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-
-        .dropdown::after {
-            content: '\25BC'; /* Unicode character for downward arrow */
-            position: absolute;
-            top: calc(50% - 5px); /* Center vertically */
-            right: 10px;
-            font-size: 14px;
-            pointer-events: none;
-        }
-
-        /* Mobile menu toggle */
-        .mobile-menu-toggle {
-            display: none; /* Initially hidden on desktop */
-        }
-
         /* Content area styles */
         .content {
             flex: 1;
             padding: 20px;
+            overflow-y: auto; /* Allow vertical scrolling within the content area if needed */
         }
 
         /* Banner styles */
