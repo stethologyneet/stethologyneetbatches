@@ -13,13 +13,13 @@
         }
 
         .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
+            max-width: 100%; /* Ensure it fits within iframe width */
+            overflow: hidden; /* Hide horizontal overflow */
             padding: 20px;
             background: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            margin: 0 auto; /* Center align within iframe */
         }
 
         header {
@@ -50,6 +50,7 @@
 
         .courses {
             display: flex;
+            flex-wrap: wrap; /* Ensure cards wrap if space is limited */
             justify-content: space-around;
         }
 
@@ -57,7 +58,8 @@
             background: #f9f9f9;
             border: 1px solid #ddd;
             padding: 20px;
-            width: 30%;
+            width: calc(30% - 20px); /* Adjust width to fit within container with margin */
+            margin: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
