@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* Global styles */
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
-
         body {
             font-family: Arial, sans-serif;
             background-color: white;
@@ -24,7 +19,6 @@
 
         @keyframes fadeIn {
             0% {
-                transform: translateY(20px);
                 opacity: 0;
             }
 
@@ -34,20 +28,110 @@
             }
         }
 
+        /* Sidebar styles */
+        .sidebar {
+            width: 235px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: blue white;
+            scroll-behavior: smooth; /* Smooth scrolling behavior */
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 1px; /* Adjusted scrollbar width */
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: white;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: blue;
+            border-radius: 2px;
+        }
+
+        /* Sidebar links */
+        .sidebar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 14px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align text to the left */
+            position: relative;
+        }
+
+        .sidebar a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            background-color: #f0f8ff;
+            color: blue;
+        }
+
+        .sidebar a.active {
+            background-color: #e0f0ff;
+            border: 1px solid blue;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            color: blue;
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .dropdown select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            appearance: none;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .dropdown::after {
+            content: '\25BC';
+            position: absolute;
+            top: calc(50% - 5px);
+            right: 10px;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+        }
+
         /* Content area styles */
         .content {
             flex: 1;
             padding: 20px;
-            overflow-y: auto; /* Allow vertical scrolling within the content area if needed */
         }
 
         /* Banner styles */
         .banner {
             background-color: white;
             color: black;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
-            font-size: 24px;
+            font-size: 15px;
             font-weight: bold;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(0, 0, 0, 0.1);
@@ -99,8 +183,8 @@
 
         /* Button styles */
         .button-container {
-            flex: 1 0 calc(25% - 20px); /* Adjusted for desktop to fit 4 buttons per row */
-            max-width: calc(25% - 20px); /* Adjusted for desktop to fit 4 buttons per row */
+            flex: 1 0 calc(25% - 20px);
+            max-width: calc(25% - 20px);
             height: 120px;
             background-color: white;
             border-radius: 10px;
@@ -140,7 +224,6 @@
         }
 
         @media (max-width: 900px) {
-            /* Adjust sidebar and button container for tablets */
             .sidebar {
                 width: 100%;
                 height: 100vh;
@@ -155,7 +238,7 @@
             }
 
             .mobile-menu-toggle {
-                display: block; /* Show toggle button on tablets */
+                display: block;
                 font-size: 20px;
                 text-align: center;
                 cursor: pointer;
@@ -163,142 +246,76 @@
             }
 
             .button-container {
-                flex: 1 0 calc(50% - 20px); /* 2 buttons per row for tablets */
-                max-width: calc(50% - 20px); /* 2 buttons per row for tablets */
+                flex: 1 0 calc(50% - 20px);
+                max-width: calc(50% - 20px);
             }
         }
 
         @media (max-width: 600px) {
-            /* Adjust button container for mobile */
             .button-container {
-                flex: 1 0 calc(50% - 20px); /* 2 buttons per row for mobile */
-                max-width: calc(50% - 20px); /* 2 buttons per row for mobile */
-                height: 100px; /* Reduced height for mobile */
+                flex: 1 0 calc(50% - 20px);
+                max-width: calc(50% - 20px);
+                height: 100px;
             }
-        }/* Scrollbar styles */
-/* Works only in WebKit browsers (e.g., Chrome, Safari) */
-::-webkit-scrollbar {
-    width: 5px; /* Width of the scrollbar */
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Color of the track */
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #007bff; /* Color of the scrollbar handle */
-    border-radius: 10px; /* Rounded corners of the handle */
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #0056b3; /* Darker color when hovered */
-}
-
+        }
     </style>
     <title>Stethology for NEET</title>
 </head>
 
 <body>
-
-
-    <!-- Content section -->
-    <div class="content">
-        <!-- Banner and navigation bar -->
-        <div class="banner">
-            <b><font size="4">NCERT Mastery Series 1.0</font></b>
+    <div class="sidebar">
+        <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo" style="max-width: 100%; max-height: 70%; margin-bottom: 20px;">
+        <div class="dropdown">
+            <select id="class-select" onchange="handleDropdownChange(event)">
+                <option value="Select class" disabled>Select class</option>
+                <option value="🧑‍🎓XI - NEET">🧑‍🎓XI - NEET</option>
+                <option value="🧑‍🎓XII - NEET">🧑‍🎓XII - NEET</option>
+                <option value="🧑‍🎓Dropper - NEET">🧑‍🎓Dropper - NEET</option>
+            </select>
         </div>
-        <div class="navbar">
-            <a class="active">All Classes</a>
-            <a href="#" onclick="comingSoon(event)">Community</a>
-            <a href="#" onclick="comingSoon(event)">📢</a>
-        </div>
-        <!-- Button containers -->
-        <div class="container">
-            <div class="button-container" onclick="navigateTo('https://parnavar.github.io/stethologyneet.github.io/', this)">
-                <div class="button-icon">🔔</div>
-                <div class="button-text">Notices</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://www.example.com/subject2', this)">
-                <div class="button-icon">🔬</div>
-                <div class="button-text">Physics</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://stethologyforneet.godaddysites.com/biology-nms-qp', this)">
-                <div class="button-icon">🌿</div>
-                <div class="button-text">Botany</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://www.example.com/subject4', this)">
-                <div class="button-icon">🦁</div>
-                <div class="button-text">Zoology</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://www.example.com/subject5', this)">
-                <div class="button-icon">⚛️</div>
-                <div class="button-text">Inorganic</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://www.example.com/subject6', this)">
-                <div class="button-icon">🧪</div>
-                <div class="button-text">Organic</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://www.example.com/subject7', this)">
-                <div class="button-icon">📘</div>
-                <div class="button-text">Physical</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://www.example.com/subject8', this)">
-                <div class="button-icon">📝</div>
-                <div class="button-text">Tests</div>
-            </div>
-            <div class="button-container" onclick="navigateTo('https://www.example.com/subject9', this)">
-                <div class="button-icon">👨‍🏫</div>
-                <div class="button-text">Mentorship</div>
-                <span class="premium-label">PREMIUM</span>
-            </div>
-            <div class="button-container" onclick="navigateTo('#', this)">
-                <div class="button-icon">❓</div>
-                <div class="button-text">Doubts</div>
-            </div>
-        </div>
+        <a href="homepage.html" target="content-frame" class="active">🏠 Home</a>
+        <a href="https://www.example.com/subject1" target="content-frame">🎓 Study</a>
+        <a href="batches.html" target="content-frame">✍️ Batches</a>
+        <a href="https://www.example.com/subject3" target="content-frame">📝 Test Series</a>
+        <a href="" target="content-frame">👨🏻‍🏫 Mentorship</a>
+        <a href="" target="content-frame">🌐 Connect</a>
+        <a href="chatbot.html" target="content-frame">🤖 AI chat/Doubt support</a>
+        <a href="" target="content-frame">🤖 support</a>
+        <a href="" target="content-frame">🤖 support</a>
+        <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
     </div>
 
-    <!-- JavaScript to toggle sidebar in mobile -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve the selected value from localStorage if available
-            const selectedValue = localStorage.getItem('selectedClass');
-            if (selectedValue) {
-                // Set the dropdown value to the retrieved value
-                document.querySelector('.dropdown select').value = selectedValue;
-            }
+    <div class="content">
+        <div class="banner">🩺 Stethology NEET</div>
+        <iframe id="content-frame" name="content-frame" src="https://parnavar.github.io/stethologyneet.github.io" style="border:none; width:100%; height:calc(100vh - 70px);"></iframe>
+    </div>
 
-            // Event listener for dropdown change
-            document.querySelector('.dropdown select').addEventListener('change', function (event) {
-                const value = event.target.value;
-                localStorage.setItem('selectedClass', value); // Store selected value in localStorage
-                alert(`Selected: ${value}`);
-                // You can add code here to navigate to different pages based on the selection
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('show-sidebar');
+        }
+
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
             });
         });
 
-        function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('show-sidebar');
+        const selectElement = document.getElementById('class-select');
+        const savedClass = localStorage.getItem('selectedClass');
+
+        if (savedClass) {
+            selectElement.value = savedClass;
+        } else {
+            selectElement.value = "Select class";
         }
 
-        function navigateTo(url, element) {
-            element.classList.add('clicked');
-            setTimeout(function () {
-                if (url !== '#') {
-                    window.open(url, '_blank');
-                }
-                element.classList.remove('clicked');
-            }, 400);
+        function handleDropdownChange(event) {
+            localStorage.setItem('selectedClass', event.target.value);
         }
 
-        function comingSoon(event) {
-            event.preventDefault();
-            alert("Coming Soon");
-        }
+        selectElement.addEventListener('change', handleDropdownChange);
     </script>
 </body>
 
