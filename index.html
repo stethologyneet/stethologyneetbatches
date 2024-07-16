@@ -39,29 +39,25 @@
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: blue white;
-            scroll-behavior: smooth; /* Smooth scrolling behavior */
+            scroll-behavior: smooth;
         }
 
         /* Scrollbar styles */
-        /* Works only in WebKit browsers (e.g., Chrome, Safari) */
         ::-webkit-scrollbar {
-            width: 5px; /* Width of the scrollbar */
+            width: 5px;
         }
 
-        /* Track */
         ::-webkit-scrollbar-track {
-            background: #f1f1f1; /* Color of the track */
+            background: #f1f1f1;
         }
 
-        /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: #007bff; /* Color of the scrollbar handle */
-            border-radius: 10px; /* Rounded corners of the handle */
+            background: #007bff;
+            border-radius: 10px;
         }
 
-        /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: #0056b3; /* Darker color when hovered */
+            background: #0056b3;
         }
 
         /* Sidebar links */
@@ -78,7 +74,7 @@
             transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Align text to the left */
+            justify-content: flex-start;
             position: relative;
         }
 
@@ -162,7 +158,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             box-sizing: border-box;
-            margin-top: 70px; /* Added margin to accommodate banner */
+            margin-top: 70px;
         }
 
         .navbar a {
@@ -245,7 +241,7 @@
                 position: fixed;
                 top: 0;
                 left: -100%;
-                transition: all 0.3s ease;
+                transition: left 0.3s ease;
             }
 
             .sidebar.show-sidebar {
