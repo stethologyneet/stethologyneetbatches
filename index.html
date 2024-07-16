@@ -5,42 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Global styles */
+        /* Reset and global styles */
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
             margin: 0;
             padding: 0;
+            background-color: #f0f0f0;
             display: flex;
-            flex-direction: column; /* Ensure flex-direction is column */
-            min-height: 100vh; /* Ensure full height */
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Banner styles */
         .banner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             background-color: white;
             padding: 10px 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
         }
 
@@ -51,7 +37,6 @@
         .mobile-menu-toggle {
             font-size: 20px;
             cursor: pointer;
-            display: block;
         }
 
         /* Sidebar styles */
@@ -59,17 +44,15 @@
             width: 235px;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
             padding: 20px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: blue white;
             scroll-behavior: smooth;
             position: fixed;
-            top: 0;
+            top: 70px; /* Adjusted to start below the fixed banner */
             left: -100%; /* Initially hidden on mobile */
-            height: 100vh;
+            height: calc(100vh - 70px); /* Adjusted to fit remaining height */
             transition: left 0.3s ease;
         }
 
@@ -159,6 +142,8 @@
             flex: 1;
             padding: 20px;
             margin-top: 70px; /* Offset content to avoid overlapping with fixed banner */
+            overflow-y: auto;
+            background-color: #fff;
         }
 
         /* Button styles */
@@ -206,9 +191,8 @@
         @media (max-width: 900px) {
             .sidebar {
                 width: 50%;
-                height: 100vh;
-                position: fixed;
-                top: 0;
+                height: calc(100vh - 70px); /* Adjusted to fit remaining height */
+                top: 70px; /* Adjusted to start below the fixed banner */
                 left: -100%; /* Hide sidebar off-screen */
                 transition: left 0.3s ease;
             }
@@ -219,8 +203,6 @@
 
             .mobile-menu-toggle {
                 display: block;
-                font-size: 20px;
-                cursor: pointer;
             }
 
             .button-container {
@@ -229,7 +211,7 @@
             }
 
             .content {
-                margin-top: 0; /* Adjust content margin for smaller screens */
+                margin-top: 70px; /* Ensure content starts below fixed banner */
             }
         }
 
