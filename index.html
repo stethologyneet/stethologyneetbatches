@@ -43,27 +43,26 @@
         }
 
         /* Scrollbar styles */
-/* Works only in WebKit browsers (e.g., Chrome, Safari) */
-::-webkit-scrollbar {
-    width: 5px; /* Width of the scrollbar */
-}
+        /* Works only in WebKit browsers (e.g., Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 5px; /* Width of the scrollbar */
+        }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Color of the track */
-}
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Color of the track */
+        }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #007bff; /* Color of the scrollbar handle */
-    border-radius: 10px; /* Rounded corners of the handle */
-}
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #007bff; /* Color of the scrollbar handle */
+            border-radius: 10px; /* Rounded corners of the handle */
+        }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #0056b3; /* Darker color when hovered */
-}
-
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0056b3; /* Darker color when hovered */
+        }
 
         /* Sidebar links */
         .sidebar a {
@@ -136,17 +135,34 @@
         }
 
         /* Banner styles */
-        /* Removed banner styles */
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
 
-        /* Navbar styles */
+        .banner img {
+            height: 40px;
+        }
+
         .navbar {
             display: flex;
             justify-content: center;
+            align-items: center;
             background-color: white;
             padding: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             box-sizing: border-box;
+            margin-top: 70px; /* Added margin to accommodate banner */
         }
 
         .navbar a {
@@ -239,14 +255,20 @@
             .mobile-menu-toggle {
                 display: block;
                 font-size: 20px;
-                text-align: center;
                 cursor: pointer;
-                margin-bottom: 10px;
             }
 
             .button-container {
                 flex: 1 0 calc(50% - 20px);
                 max-width: calc(50% - 20px);
+            }
+
+            .navbar {
+                margin-top: 0;
+            }
+
+            .banner {
+                justify-content: space-between;
             }
         }
 
@@ -262,8 +284,12 @@
 </head>
 
 <body>
+    <div class="banner">
+        <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
+        <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
+    </div>
+
     <div class="sidebar">
-        <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo" style="max-width: 100%; max-height: 70%; margin-bottom: 20px;">
         <div class="dropdown">
             <select id="class-select" onchange="handleDropdownChange(event)">
                 <option value="Select class" disabled>Select class</option>
@@ -280,7 +306,6 @@
         <a href="chatbot.html" target="content-frame">🤖 AI chat/Doubt support</a>
         <a href="" target="content-frame">🤖 support</a>
         <a href="" target="content-frame">🤖 support</a>
-        <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
     </div>
 
     <div class="content">
