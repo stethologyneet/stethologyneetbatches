@@ -40,6 +40,15 @@
             scrollbar-width: thin;
             scrollbar-color: blue white;
             scroll-behavior: smooth;
+            position: fixed;
+            top: 0;
+            left: -100%; /* Initially hidden on mobile */
+            height: 100vh;
+            transition: left 0.3s ease;
+        }
+
+        .sidebar.show-sidebar {
+            left: 0;
         }
 
         /* Scrollbar styles */
@@ -240,7 +249,7 @@
                 height: 100vh;
                 position: fixed;
                 top: 0;
-                left: -100%;
+                left: -100%; /* Hide sidebar off-screen */
                 transition: left 0.3s ease;
             }
 
